@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/filter_item.dart';
+
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
 
@@ -11,6 +13,9 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersScreenState extends State<FiltersScreen> {
   var _glutenFreeFilterSet = false;
+  var _lactoseFreeFilterSet = false;
+  var _vegetarianFilterSet = false;
+  var _veganFilterSet = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +25,46 @@ class _FiltersScreenState extends State<FiltersScreen> {
       ),
       body: Column(
         children: [
-          SwitchListTile(
-            value: _glutenFreeFilterSet,
+          FilterItem(
+            filterSet: _glutenFreeFilterSet,
+            titleText: 'Gluten-free',
+            subtitleText: 'Only include gluten-free meals.',
             onChanged: (isChecked) {
               setState(() {
                 _glutenFreeFilterSet = isChecked;
               });
             },
-            title: Text(
-              'Gluten-free',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            subtitle: Text(
-              'Only include gluten-free meals.',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-          )
+          ),
+          FilterItem(
+            filterSet: _lactoseFreeFilterSet,
+            titleText: 'Lactose-free',
+            subtitleText: 'Only include lactose-free meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _lactoseFreeFilterSet = isChecked;
+              });
+            },
+          ),
+          FilterItem(
+            filterSet: _vegetarianFilterSet,
+            titleText: 'Vegetarian',
+            subtitleText: 'Only include vegetarian meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _vegetarianFilterSet = isChecked;
+              });
+            },
+          ),
+          FilterItem(
+            filterSet: _veganFilterSet,
+            titleText: 'Vegan',
+            subtitleText: 'Only include vegan meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _veganFilterSet = isChecked;
+              });
+            },
+          ),
         ],
       ),
     );
