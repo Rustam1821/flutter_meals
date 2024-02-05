@@ -1,4 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals/providers/meals_provider.dart';
+
+import '../models/meal.dart';
 
 enum Filter {
   glutenFree,
@@ -31,3 +34,15 @@ class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
 final filtersProvider =
     StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>(
         (ref) => FiltersNotifier());
+
+final filteredMealsProvider = Provider<List<Meal>>((ref) {
+  final activeFilters = ref.watch(filtersProvider);
+  var meals = ref.watch(mealsProvider);
+  return meals
+      .where((meal) =>
+          (!activeFilters[Filter.glutenFree]! || meal.isGlutenFree) &&
+          (!activeFilters[Filter.lactoseFree]! || meal.isLactoseFree) &&
+          (!activeFilters[Filter.vegan]! || meal.isVegan) &&
+          (!activeFilters[Filter.vegetarian]! || meal.isVegetarian))
+      .toList();
+});
