@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/screens/categories.dart';
+import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/main_drawer.dart';
 
@@ -31,13 +32,13 @@ class _TabsScreenState extends State<TabsScreen> {
     if (isExisting) {
       setState(() {
         _favouriteMeals.remove(meal);
-        _showInfoMessage('Meal is no longer a favourite');
       });
+      _showInfoMessage('Meal is no longer a favourite');
     } else {
       setState(() {
         _favouriteMeals.add(meal);
-        _showInfoMessage('Meal marked as a favourite');
       });
+      _showInfoMessage('Meal marked as a favourite');
     }
   }
 
@@ -48,11 +49,10 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   void _setScreen(String identifier) {
-    print('identifier is: $identifier');
+    Navigator.of(context).pop();
     if (identifier == 'filters') {
-
-    } else {
-      Navigator.of(context).pop();
+      final route = MaterialPageRoute(builder: (ctx) => const FiltersScreen());
+      Navigator.push(context, route);
     }
   }
 
