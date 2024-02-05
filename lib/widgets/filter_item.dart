@@ -15,18 +15,13 @@ class FilterItem extends StatelessWidget {
   final bool _filterSet;
   final String _titleText;
   final String _subtitleText;
-  final void Function (bool) _onChanged;
+  final void Function(bool) _onChanged;
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
       value: _filterSet,
       onChanged: _onChanged,
-      // onChanged: (isChecked) {
-        // setState(() {
-        //   _glutenFreeFilterSet = isChecked;
-        // });
-
       title: Text(
         // 'Gluten-free',
         _titleText,
