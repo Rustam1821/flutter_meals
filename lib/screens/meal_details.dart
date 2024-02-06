@@ -12,10 +12,9 @@ class MealDetailsScreen extends ConsumerWidget {
 
   final Meal meal;
 
-  // final notifier =  FavoriteMealsNotifier();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFavourite = ref.watch(favoriteMealsProvider).contains(meal);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -32,7 +31,7 @@ class MealDetailsScreen extends ConsumerWidget {
                       : '${meal.title} removed.'),
                 ));
               },
-              icon: const Icon(Icons.star))
+              icon: Icon(isFavourite ? Icons.star : Icons.star_border))
         ],
       ),
       body: SingleChildScrollView(
